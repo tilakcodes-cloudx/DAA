@@ -1,0 +1,23 @@
+edges = [
+    (1, 'B', 'C'),
+    (2, 'A', 'B'),
+    (3, 'A', 'C'),
+    (4, 'B', 'D'),
+    (5, 'C', 'D')
+]
+
+parent = {}
+
+for _, u, v in edges:
+    parent[u] = u
+    parent[v] = v
+
+def find(x):
+    while parent[x] != x:
+        x = parent[x]
+    return x
+
+for w, u, v in edges:
+    if find(u) != find(v):
+        print(u, "-", v, "=", w)
+        parent[find(v)] = find(u)
