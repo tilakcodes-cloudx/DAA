@@ -1,0 +1,43 @@
+import time
+import matplotlib.pyplot as plt
+
+def binary_search(arr, key):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
+
+sizes = [10000, 20000, 30000, 40000, 50000]
+times = []
+
+for n in sizes:
+    arr = list(range(n))
+    key = n - 1
+
+    start = time.time()
+
+    for i in range(100):
+        binary_search(arr, key)
+
+    end = time.time()
+
+    times.append(end - start)
+
+print("Time: ",times)
+
+plt.plot(sizes, times, marker='o')
+plt.xlabel("Number of Elements (n)")
+plt.ylabel("Time Taken")
+plt.title("Binary Search Graph")
+plt.grid(True)
+plt.show()
