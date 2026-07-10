@@ -1,0 +1,27 @@
+text = "ABCABCD"
+pattern = "BCD"
+
+m = len(pattern)
+n = len(text)
+
+shift = {}
+for i in range(m - 1):
+    shift[pattern[i]] = m - i - 1
+
+i = m - 1
+
+while i < n:
+    j = m - 1
+    k = i
+
+    while j >= 0 and text[k] == pattern[j]:
+        k -= 1
+        j -= 1
+
+    if j == -1:
+        print("Pattern found at position", k + 1)
+        break
+
+    i += shift.get(text[i], m)
+else:
+    print("Pattern not found")
