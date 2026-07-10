@@ -1,0 +1,30 @@
+import time
+import matplotlib.pyplot as plt
+
+def linear_search(arr, key):
+    for i in range(len(arr)):
+        if arr[i] == key:
+            return i
+    return -1
+
+sizes = [1000, 2000, 3000, 4000, 5000]
+times = []
+
+for n in sizes:
+    arr = list(range(n))
+    key = n - 1
+
+    start = time.time()
+
+    for i in range(100):
+        linear_search(arr, key)
+
+    end = time.time()
+
+    times.append(end - start)
+
+plt.plot(sizes, times, marker='o')
+plt.xlabel("Number of Elements (n)")
+plt.ylabel("Time Taken")
+plt.title("Linear Search Performance")
+plt.show()
